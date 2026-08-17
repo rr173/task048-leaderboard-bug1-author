@@ -121,6 +121,9 @@ func (a *API) handleTop(w http.ResponseWriter, r *http.Request) {
 		n = parsed
 	}
 	entries, total := a.board.TopN(n)
+	if entries == nil {
+		entries = []Entry{}
+	}
 	writeJSON(w, http.StatusOK, topResponse{Entries: entries, Total: total})
 }
 
